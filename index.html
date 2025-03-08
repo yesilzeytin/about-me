@@ -95,7 +95,9 @@
       background-color: #fcf56f;
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 1000;
+      /* Add this line */
+      border-bottom: 2px solid #000; /* black border */
     }
     .navbar {
       display: flex;
@@ -203,7 +205,8 @@
         flex-direction: column;
         width: 200px;
         margin-right: 1rem;
-        border: 1px solid #ddd;
+        /* Add this line */
+        border: 2px solid #000; /* black border */
         display: none; /* hidden by default */
       }
       .navbar ul.open {
@@ -264,8 +267,8 @@
         <ul class="item-list">
           <li>
             <h3>Digital Design & Verification Engineer</h3>
-            <p class="date">2021 – Present</p>
-            <p><a href="https://yongatek.com/">Yongatek Microelectronics</a></p>
+            <p class="date">June 2022 – Present</p>
+            <p><b><u><a href="https://yongatek.com/">Yongatek Microelectronics</a></u></b></p>
             <p>
               <br>
               Contributed to IP verification projects (e.g., CAN, 1G Ethernet, DMA IPs), SoC verification projects (SoCs utilizing RISC-V and Arm cores), avionics projects (including DO-254 and AMC 20-152A compliance), and internal tooling development.
@@ -283,12 +286,24 @@
             </p>
           </li>
           <li>
-            <h3>Previous Role</h3>
-            <p class="date">2019 – 2021</p>
+            <h3>Non-Matriculated Researcher</h3>
+            <p class="date">June 2022 – Present</p>
+            <p><b><u><a href="https://yongatek.com/">Yongatek Microelectronics</a></u></b></p>
             <p>
-              Worked at ABC Startup building their initial product. I led a small engineering team to ...
+              <br>
+              Contributed to IP verification projects (e.g., CAN, 1G Ethernet, DMA IPs), SoC verification projects (SoCs utilizing RISC-V and Arm cores), avionics projects (including DO-254 and AMC 20-152A compliance), and internal tooling development.
+              <br><br>
+              Key Technologies & Methodologies:<br>
+              - SystemVerilog UVM and SystemVerilog Assertions (SVA)<br>
+              - Metric-Driven Verification (MDV)<br>
+              - Tools: Cadence Xcelium, Verisium Debug, Verisium Manager, Synopsys VCS<br>
+              - VIPs: Cadence, Synopsys, Truechip<br>
+              - RISC-V Instruction Set Architecture (ISA) and Spike Instruction Set Simulator<br>
+              - Bare-metal programming with C<br>
+              - Design Assurance Guidance for Airborne Electronic Hardware (DO-254) and Development Assurance for Airborne Electronic Hardware (AMC 20-152A)<br>
+              - Python-based verification utilities and internal tooling development<br>
+              - Version Control: Git, GitLab CI, SVN
             </p>
-            <p><a href="#">Startup Link</a></p>
           </li>
         </ul>
       </section>
