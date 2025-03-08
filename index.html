@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Personal Page</title>
   <style>
-    /* --------------------------
-       BASIC RESET & GLOBAL STYLES
-    ----------------------------*/
+    /* -------------------------------
+       RESET & GLOBAL STYLES
+    --------------------------------*/
     * {
-      margin: 0; 
-      padding: 0; 
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
     body {
       font-family: Arial, sans-serif;
       color: #333;
       background-color: #f8f8f8;
-      line-height: 1.6;
+      line-height: 1.5;
     }
     a {
       color: #333;
@@ -26,43 +26,97 @@
     a:hover {
       text-decoration: underline;
     }
-    
-    /* --------------------------
-       HEADER & NAV
-    ----------------------------*/
+
+    /* -------------------------------
+       LAYOUT WRAPPER
+    --------------------------------*/
+    .page-wrapper {
+      /* Because we have a fixed sidebar, we push main content over */
+      margin-left: 250px; 
+      transition: margin-left 0.3s ease;
+    }
+
+    /* -------------------------------
+       FIXED SIDEBAR
+    --------------------------------*/
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 250px;
+      background-color: #fcf56f;
+      padding: 1rem;
+      text-align: center;
+      overflow-y: auto; /* If content grows too large */
+      transition: transform 0.3s ease;
+      z-index: 1001; /* Appear on top if we do a mobile toggle */
+    }
+    .sidebar .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 3px solid #fff;
+    }
+    .sidebar h1 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .sidebar p {
+      color: #444;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .sidebar .sidebar-links {
+      list-style-type: none;
+    }
+    .sidebar .sidebar-links li {
+      margin: 0.5rem 0;
+    }
+    .sidebar .sidebar-links a {
+      display: inline-block;
+      font-size: 0.9rem;
+      color: #333;
+      background-color: #fff;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    }
+    .sidebar .sidebar-links a:hover {
+      background-color: #eee;
+    }
+
+    /* -------------------------------
+       TOP NAVIGATION BAR
+    --------------------------------*/
     header {
       background-color: #fcf56f;
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 999;
     }
-
     .navbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0.8rem 1rem;
     }
-
     .navbar .brand {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: bold;
     }
-
-    /* Navigation links container */
     .navbar ul {
       list-style-type: none;
       display: flex;
       gap: 1rem;
     }
-
     .navbar li {
       display: inline-block;
     }
-
-    /* Hamburger icon on mobile */
     .menu-toggle {
       display: none;
       font-size: 1.4rem;
@@ -71,50 +125,79 @@
       border: none;
     }
 
-    /* --------------------------
-       SECTIONS
-    ----------------------------*/
-    section {
+    /* -------------------------------
+       MAIN CONTENT SECTIONS
+    --------------------------------*/
+    main {
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 1.5rem auto;
       padding: 0 1rem;
+    }
+    section {
+      margin-bottom: 2rem;
     }
     section h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
-      color: #333;
     }
-    section .item-list {
+    .section-description {
+      margin-bottom: 1rem;
+      color: #555;
+    }
+    .item-list {
       list-style-type: none;
-      margin-top: 1rem;
+      margin: 1rem 0;
     }
-    section .item-list li {
+    .item-list li {
       background: #fff;
       padding: 1rem;
       margin-bottom: 1rem;
       border-radius: 5px;
       box-shadow: 0 0 5px rgba(0,0,0,0.05);
     }
-    section .item-list li h3 {
+    .item-list li h3 {
       margin-bottom: 0.5rem;
       font-size: 1.2rem;
     }
-    section .item-list li .date {
+    .item-list li .date {
       font-style: italic;
       color: #666;
       margin-bottom: 0.5rem;
     }
-    section .item-list li p {
-      margin-bottom: 0.5rem;
+
+    /* -------------------------------
+       FOOTER
+    --------------------------------*/
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      color: #666;
     }
 
-    /* --------------------------
-       MEDIA QUERIES (RESPONSIVE)
-    ----------------------------*/
+    /* -------------------------------
+       RESPONSIVE MEDIA QUERIES
+    --------------------------------*/
     @media (max-width: 768px) {
+      /* Collapse sidebar */
+      .sidebar {
+        transform: translateX(-100%); 
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .page-wrapper {
+        margin-left: 0;
+      }
+
+      /* Show hamburger menu */
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      /* Hide the normal nav links by default on small screens */
       .navbar ul {
         position: absolute;
-        top: 60px; 
+        top: 60px;
         right: 0;
         background-color: #fcf56f;
         flex-direction: column;
@@ -129,122 +212,155 @@
       .navbar li {
         margin: 0.5rem 0;
       }
-      .menu-toggle {
-        display: inline-block;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER / NAV -->
-  <header>
-    <div class="navbar">
-      <div class="brand">My Personal Page</div>
-      <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
-        &#9776;
-      </button>
-      <ul id="nav-list">
-        <li><a href="#career">Career</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#teaching">Teaching</a></li>
-        <li><a href="#blog-posts">Blog Posts</a></li>
-        <li><a href="#interests">Non-Professional Interests</a></li>
-      </ul>
-    </div>
-  </header>
+  <!-- SIDEBAR (fixed) -->
+  <aside class="sidebar" id="sidebar">
+    <!-- A placeholder circular photo -->
+    <img class="profile-pic" 
+         src="https://via.placeholder.com/120" 
+         alt="Profile Picture"/>
+    <h1>Your Name</h1>
+    <p>Your short bio or tagline here.  
+       <br/>Location, specialty, etc.</p>
+    <ul class="sidebar-links">
+      <li><a href="#" target="_blank">LinkedIn</a></li>
+      <li><a href="#" target="_blank">ResearchGate</a></li>
+      <li><a href="#" target="_blank">GitHub</a></li>
+      <li><a href="mailto:youremail@example.com">Email</a></li>
+      <!-- Add more links as you like -->
+    </ul>
+  </aside>
 
-  <!-- CAREER SECTION -->
-  <section id="career">
-    <h2>Career</h2>
-    <p>Here you can list your job titles, a short bio, or notable career milestones.</p>
-    <ul class="item-list">
-      <li>
-        <h3>Job Title / Position</h3>
-        <p class="date">Start Date – End Date</p>
-        <p>Short description of this position, your responsibilities, highlights, etc.</p>
-        <p>
-          <a href="#">Link to project/company website</a>
+  <!-- PAGE WRAPPER (content to the right of sidebar) -->
+  <div class="page-wrapper">
+
+    <!-- TOP NAV BAR -->
+    <header>
+      <div class="navbar">
+        <div class="brand">My Personal Page</div>
+        <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleNav()">&#9776;</button>
+        <ul id="nav-list">
+          <li><a href="#career">Career</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#blog-posts">Blog</a></li>
+          <li><a href="#interests">Interests</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <!-- CAREER SECTION -->
+      <section id="career">
+        <h2>Career</h2>
+        <p class="section-description">
+          Describe your professional journey, positions, or highlights below.
         </p>
-      </li>
-      <!-- Add more items as needed -->
-    </ul>
-  </section>
+        <ul class="item-list">
+          <li>
+            <h3>Current Role</h3>
+            <p class="date">2021 – Present</p>
+            <p>
+              At XYZ Company, working on cutting‐edge web technologies. My main responsibilities include ...
+            </p>
+            <p><a href="#">Company Link</a></p>
+          </li>
+          <li>
+            <h3>Previous Role</h3>
+            <p class="date">2019 – 2021</p>
+            <p>
+              Worked at ABC Startup building their initial product. I led a small engineering team to ...
+            </p>
+            <p><a href="#">Startup Link</a></p>
+          </li>
+        </ul>
+      </section>
 
-  <!-- PUBLICATIONS SECTION -->
-  <section id="publications">
-    <h2>Publications</h2>
-    <p>List your papers, articles, or other published work here.</p>
-    <ul class="item-list">
-      <li>
-        <h3>Publication Title</h3>
-        <p class="date">Published: 2020</p>
-        <p>Short description of the publication.</p>
-        <p>
-          <strong>Citation:</strong> Your Name (2020). <em>Publication Title</em>. Journal XYZ, 1(2).
-          <br />
-          <a href="#">Download Paper</a> | <a href="#">Download Slides</a>
+      <!-- PUBLICATIONS SECTION -->
+      <section id="publications">
+        <h2>Publications</h2>
+        <p class="section-description">
+          A selection of papers, articles, or other works you’ve published.
         </p>
-      </li>
-      <!-- Add more items as needed -->
-    </ul>
-  </section>
+        <ul class="item-list">
+          <li>
+            <h3>Paper Title #1</h3>
+            <p class="date">Published in Journal 1, 2022</p>
+            <p>Brief description or abstract of the publication ...</p>
+            <p>
+              <strong>Citation:</strong> Your Name (2022). <em>Paper Title #1</em>. Journal 1, 10(2).
+              <br />
+              <a href="#">Download Paper</a> | <a href="#">Slides</a>
+            </p>
+          </li>
+          <!-- Add more papers as needed -->
+        </ul>
+      </section>
 
-  <!-- TEACHING SECTION -->
-  <section id="teaching">
-    <h2>Teaching</h2>
-    <p>Include courses you have taught, TA experiences, or workshops you have organized.</p>
-    <ul class="item-list">
-      <li>
-        <h3>Course Name</h3>
-        <p class="date">Semester/Year</p>
-        <p>Short description of the course, your role, and your contributions.</p>
-      </li>
-      <!-- Add more items as needed -->
-    </ul>
-  </section>
+      <!-- TEACHING SECTION -->
+      <section id="teaching">
+        <h2>Teaching</h2>
+        <p class="section-description">
+          Document your teaching roles, workshops, or mentoring experiences here.
+        </p>
+        <ul class="item-list">
+          <li>
+            <h3>Course or Workshop #1</h3>
+            <p class="date">Spring 2023</p>
+            <p>Short description of your role and the course/workshop content ...</p>
+          </li>
+        </ul>
+      </section>
 
-  <!-- BLOG POSTS SECTION -->
-  <section id="blog-posts">
-    <h2>Blog Posts</h2>
-    <p>Link to or feature blog posts here.</p>
-    <ul class="item-list">
-      <li>
-        <h3>Post Title</h3>
-        <p class="date">Date</p>
-        <p>A short teaser or excerpt.</p>
-        <p><a href="#">Read More</a></p>
-      </li>
-      <!-- Add more items as needed -->
-    </ul>
-  </section>
+      <!-- BLOG POSTS SECTION -->
+      <section id="blog-posts">
+        <h2>Blog</h2>
+        <p class="section-description">
+          Excerpts or links to your personal blog posts.
+        </p>
+        <ul class="item-list">
+          <li>
+            <h3>Latest Blog Post</h3>
+            <p class="date">Jan 1, 2024</p>
+            <p>A short preview or introduction to the post. <a href="#">Read More</a></p>
+          </li>
+        </ul>
+      </section>
 
-  <!-- NON-PROFESSIONAL INTERESTS SECTION -->
-  <section id="interests">
-    <h2>Non-Professional Interests</h2>
-    <p>Mention hobbies, personal projects, or anything else you enjoy outside of work.</p>
-    <ul class="item-list">
-      <li>
-        <h3>Hobby / Activity</h3>
-        <p class="date">Started in 2022</p>
-        <p>Short description or story about this hobby/interest.</p>
-      </li>
-      <!-- Add more items as needed -->
-    </ul>
-  </section>
+      <!-- NON-PROFESSIONAL INTERESTS SECTION -->
+      <section id="interests">
+        <h2>Non-Professional Interests</h2>
+        <p class="section-description">
+          Share some of your hobbies, passions, or side projects.
+        </p>
+        <ul class="item-list">
+          <li>
+            <h3>Hobby #1</h3>
+            <p class="date">Started in 2022</p>
+            <p>Why you love it, what you do, or any notable achievements related to it.</p>
+          </li>
+        </ul>
+      </section>
+    </main>
 
-  <!-- OPTIONAL FOOTER -->
-  <footer style="text-align: center; padding: 1rem 0; color: #666;">
-    <p>&copy; 2025 Your Name Here</p>
-  </footer>
+    <!-- FOOTER -->
+    <footer>
+      <p>&copy; 2025 Your Name</p>
+    </footer>
+  </div>
 
-  <!-- JS FOR MOBILE NAV TOGGLE -->
+  <!-- JS for toggling mobile nav & sidebar -->
   <script>
-    function toggleMenu() {
+    function toggleNav() {
+      // For top nav on mobile
       const navList = document.getElementById('nav-list');
       navList.classList.toggle('open');
     }
   </script>
-
 </body>
 </html>
