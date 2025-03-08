@@ -72,21 +72,43 @@
     }
     .sidebar .sidebar-links {
       list-style-type: none;
+      padding: 0; /* In case you want to remove any default list padding */
     }
+    
     .sidebar .sidebar-links li {
       margin: 0.5rem 0;
     }
     .sidebar .sidebar-links a {
-      display: inline-block;
+      /* Switch to a flex container to hold the icon + text horizontally */
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+    
+      /* Visual styling: remove the "button" look if you prefer */
+      background-color: transparent; /* or #fffcbf if you still want a background */
+      box-shadow: none;             /* remove the drop shadow if you don’t want it */
+      border-radius: 0;            /* remove corner rounding if you prefer */
+      padding: 0.2rem 0;           /* reduce padding for a simpler link look */
+    
+      /* Keep or remove as you like: 
       font-size: 0.9rem;
       color: #333;
-      background-color: #fff;
-      padding: 0.3rem 0.6rem;
       border-radius: 5px;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+      background-color: #fff;
+      */
     }
+    /* On hover, you can highlight the link text, icon, or add an underline */
     .sidebar .sidebar-links a:hover {
-      background-color: #eee;
+      background-color: #eee; /* or remove if you want no highlight */
+      text-decoration: none;  /* or underline if you prefer an underline */
+    }
+    
+    /* Icon styling */
+    .sidebar .sidebar-links a .icon {
+      width: 16px;           /* adjust as needed */
+      height: 16px;          /* adjust as needed */
+      margin-right: 0.5rem;  /* space between icon and text */
     }
 
     /* -------------------------------
