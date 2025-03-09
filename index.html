@@ -50,8 +50,11 @@
       padding: 1rem;
       text-align: center;
       overflow-y: auto; /* If content grows too large */
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease; /* for slide effect */
       z-index: 1001; /* Appear on top if we do a mobile toggle */
+    }
+    .sidebar.open {
+      transform: translateX(0);
     }
     .sidebar .profile-pic {
       width: 120px;
@@ -234,18 +237,41 @@
     /* -------------------------------
        RESPONSIVE MEDIA QUERIES
     --------------------------------*/
+    .sidebar-toggle {
+      display: none; /* show it only on mobile */
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+    
     @media (max-width: 768px) {
       /* Collapse sidebar */
+      /* Sidebar is hidden by default on mobile */
       .sidebar {
-        transform: translateX(-100%); 
+        transform: translateX(-100%); /* slide off-screen to the left */
+        width: 200px; /* narrower if you want on mobile */
       }
+      
+      /* If we add .open, the sidebar slides into view */
       .sidebar.open {
         transform: translateX(0);
       }
+
+      .sidebar-toggle {
+        display: inline-block;  /* show on mobile */
+        position: absolute;     /* if you want it pinned top-left */
+        top: 10px;
+        left: 10px;
+        z-index: 1100;          /* above the sidebar */
+      }
+    
+      /* Remove left margin on content, so it uses full width */
       .page-wrapper {
         margin-left: 0;
       }
-
+      
       /* Show hamburger menu */
       .menu-toggle {
         display: inline-block;
@@ -322,6 +348,7 @@
     <header>
       <div class="navbar">
         <div class="brand">Ugur Nezir - Personal Page</div>
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
         <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleNav()">&#9776;</button>
         <ul id="nav-list">
           <li><a href="#career">Career</a></li>
@@ -636,9 +663,11 @@
     </main>
 
     <!-- FOOTER -->
+    <!--
     <footer>
-      <p>&copy; 2025 Your Name</p>
+      <p>&copy; 2025 Ugur Nezir</p>
     </footer>
+    -->
   </div>
 
   <!-- JS for toggling mobile nav & sidebar -->
@@ -647,6 +676,11 @@
       // For top nav on mobile
       const navList = document.getElementById('nav-list');
       navList.classList.toggle('open');
+    }
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open'); 
+      // 'open' is the CSS class that sets transform: translateX(0)
     }
   </script>
 </body>
