@@ -263,9 +263,13 @@
       }
 
       .sidebar-toggle {
-        transform: translateX(-100%);
-        z-index: 1001; /* sidebar’s z-index is lower than button’s 1102 */
-      }
+         display: inline-block;  /* show on mobile */
+         position: absolute;     /* if you want it pinned top-left */
+         top: 10px;
+         left: 10px;
+         transform: translateX(-100%);
+         z-index: 1001; /* sidebar’s z-index is lower than button’s 1102 */
+       }
     
       /* Remove left margin on content, so it uses full width */
       .page-wrapper {
