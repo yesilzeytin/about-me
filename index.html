@@ -238,20 +238,23 @@
        RESPONSIVE MEDIA QUERIES
     --------------------------------*/
     .sidebar-toggle {
-      display: none; /* show it only on mobile */
+      display: none;          /* show only on mobile (see media query below) */
+      position: absolute;     
+      left: 10px;             /* place it near the left edge */
+      top: 10px;              /* place it near the top edge */
+      z-index: 1102;          /* higher than sidebar’s 1001 */
       background: none;
       border: none;
       font-size: 1.4rem;
       cursor: pointer;
-      margin-right: 1rem;
     }
     
     @media (max-width: 768px) {
       /* Collapse sidebar */
       /* Sidebar is hidden by default on mobile */
       .sidebar {
-        transform: translateX(-100%); /* slide off-screen to the left */
-        width: 200px; /* narrower if you want on mobile */
+        transform: translateX(-100%);
+        z-index: 1001; /* sidebar’s z-index is lower than button’s 1102 */
       }
       
       /* If we add .open, the sidebar slides into view */
@@ -260,11 +263,8 @@
       }
 
       .sidebar-toggle {
-        display: inline-block;  /* show on mobile */
-        position: absolute;     /* if you want it pinned top-left */
-        top: 10px;
-        left: 10px;
-        z-index: 1100;          /* above the sidebar */
+        transform: translateX(-100%);
+        z-index: 1001; /* sidebar’s z-index is lower than button’s 1102 */
       }
     
       /* Remove left margin on content, so it uses full width */
@@ -347,8 +347,8 @@
     <!-- TOP NAV BAR -->
     <header>
       <div class="navbar">
-        <div class="brand">Ugur Nezir - Personal Page</div>
         <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="brand">Ugur Nezir - Personal Page</div>
         <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleNav()">&#9776;</button>
         <ul id="nav-list">
           <li><a href="#career">Career</a></li>
