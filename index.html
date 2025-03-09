@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ugur Nezir - Personal Page</title>
   <style>
-    /* -------------------------------
-       RESET & GLOBAL STYLES
-    --------------------------------*/
+    /* RESET & GLOBAL STYLES */
     * {
       margin: 0;
       padding: 0;
@@ -27,18 +25,13 @@
       text-decoration: underline;
     }
 
-    /* -------------------------------
-       LAYOUT WRAPPER
-    --------------------------------*/
+    /* LAYOUT WRAPPER
+       (No longer forced margin-left in base styles) */
     .page-wrapper {
-      /* Because we have a fixed sidebar, we push main content over */
-      margin-left: 200px; 
       transition: margin-left 0.3s ease;
     }
 
-    /* -------------------------------
-       FIXED SIDEBAR
-    --------------------------------*/
+    /* FIXED SIDEBAR (DESKTOP) */
     .sidebar {
       position: fixed;
       border: 2px solid #000; /* solid black border */
@@ -50,11 +43,7 @@
       padding: 1rem;
       text-align: center;
       overflow-y: auto; /* If content grows too large */
-      transition: transform 0.3s ease; /* for slide effect */
-      z-index: 1001; /* Appear on top if we do a mobile toggle */
-    }
-    .sidebar.open {
-      transform: translateX(0);
+      z-index: 1001; /* Appear on top */
     }
     .sidebar .profile-pic {
       width: 120px;
@@ -75,54 +64,37 @@
     }
     .sidebar .sidebar-links {
       list-style-type: none;
-      padding: 0; /* In case you want to remove any default list padding */
+      padding: 0;
     }
-    
     .sidebar .sidebar-links li {
       margin: 0.5rem 0;
     }
     .sidebar .sidebar-links a {
-      /* Switch to a flex container to hold the icon + text horizontally */
       display: flex;
       align-items: center;
       justify-content: flex-start;
       text-align: left;
-    
-      /* Visual styling: remove the "button" look if you prefer */
-      background-color: transparent; /* or #fffcbf if you still want a background */
-      box-shadow: none;             /* remove the drop shadow if you don’t want it */
-      border-radius: 0;            /* remove corner rounding if you prefer */
-      padding: 0.2rem 0;           /* reduce padding for a simpler link look */
-    
-      /* Keep or remove as you like: 
-      font-size: 0.9rem;
-      color: #333;
-      border-radius: 5px;
-      background-color: #fff;
-      */
+      background-color: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0.2rem 0;
     }
-    /* On hover, you can highlight the link text, icon, or add an underline */
     .sidebar .sidebar-links a:hover {
-      background-color: #eee; /* or remove if you want no highlight */
-      text-decoration: none;  /* or underline if you prefer an underline */
+      background-color: #eee;
+      text-decoration: none;
     }
-    
-    /* Icon styling */
     .sidebar .sidebar-links a .icon {
-      width: 16px;           /* adjust as needed */
-      height: 16px;          /* adjust as needed */
-      margin-right: 0.5rem;  /* space between icon and text */
+      width: 16px;
+      height: 16px;
+      margin-right: 0.5rem;
     }
 
-    /* -------------------------------
-       TOP NAVIGATION BAR
-    --------------------------------*/
+    /* TOP NAVIGATION BAR */
     header {
       background-color: #fffcbf;
       position: sticky;
       top: 0;
       z-index: 1000;
-      /* Add this line */
       border-bottom: 2px solid #000; /* black border */
     }
     .navbar {
@@ -152,9 +124,7 @@
       border: none;
     }
 
-    /* -------------------------------
-       MAIN CONTENT SECTIONS
-    --------------------------------*/
+    /* MAIN CONTENT SECTIONS */
     main {
       max-width: 900px;
       margin: 1.5rem auto;
@@ -191,9 +161,7 @@
       margin-bottom: 0.5rem;
     }
 
-    /* -------------------------------
-    ITEM COLOR BLOCKS
-    --------------------------------*/
+    /* ITEM COLOR BLOCKS */
     .yongatek-item {
       background-color: #f5ffff; /* light blue */
       border: 2px solid #000;
@@ -225,61 +193,30 @@
       padding: 1rem;
     }
 
-    /* -------------------------------
-       FOOTER
-    --------------------------------*/
+    /* FOOTER (unused here) */
     footer {
       text-align: center;
       padding: 1rem 0;
       color: #666;
     }
 
-    /* -------------------------------
-       RESPONSIVE MEDIA QUERIES
-    --------------------------------*/
-    /* Sidebar Toggle Button */
-    .sidebar-toggle {
-      /* 1) Remove the transform that was shifting the button off-screen */
-      /* transform: translateX(-100%); <-- remove this line entirely */
-    
-      display: none;         
-      position: absolute;     
-      left: 10px;
-      top: 10px;
-      z-index: 1102; /* Ensure the button is above the sidebar (which is z-index: 1001) */
-      background: none;
-      border: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-    
+    /* RESPONSIVE MEDIA QUERIES */
     @media (max-width: 768px) {
-      /* Collapse sidebar */
-      /* Sidebar is hidden by default on mobile */
+      /* Make the sidebar a normal top section instead of fixed */
       .sidebar {
-        /* 2) Keep the sidebar hidden by default on mobile */
-        transform: translateX(-100%);
+        position: static;
+        width: auto;
+        margin: 1rem;
       }
-      .sidebar.open {
-        transform: translateX(0);
-      }
-    
-      .sidebar-toggle {
-        display: inline-block; /* Show the button on mobile */
-        /* 3) No transform here – let the button stay fully visible */
-      }
-    
-      /* Remove left margin on content, so it uses full width */
+      /* Remove forced margin from the content on mobile */
       .page-wrapper {
         margin-left: 0;
       }
-      
-      /* Show hamburger menu */
+      /* Hide hamburger menu, or keep if you want it for the top nav */
       .menu-toggle {
         display: inline-block;
       }
-
-      /* Hide the normal nav links by default on small screens */
+      /* Turn horizontal nav into a dropdown */
       .navbar ul {
         position: absolute;
         top: 60px;
@@ -288,9 +225,8 @@
         flex-direction: column;
         width: 200px;
         margin-right: 1rem;
-        /* Add this line */
-        border: 2px solid #000; /* black border */
-        display: none; /* hidden by default */
+        border: 2px solid #000; 
+        display: none; 
       }
       .navbar ul.open {
         display: flex;
@@ -303,40 +239,54 @@
 </head>
 <body>
 
-    <!-- SIDEBAR (fixed) -->
-    <aside class="sidebar" id="sidebar">
-    <!-- A placeholder circular photo -->
+  <!-- TOP NAV BAR -->
+  <header>
+    <div class="navbar">
+      <div class="brand">Ugur Nezir - Personal Page</div>
+      <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleNav()">&#9776;</button>
+      <ul id="nav-list">
+        <li><a href="#career">Career</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#interests">Interests</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- SIDEBAR (NOW PLACED AFTER HEADER, BEFORE MAIN CONTENT) -->
+  <aside class="sidebar" id="sidebar">
     <img class="profile-pic" 
          src="https://media.licdn.com/dms/image/v2/C4D03AQHqr01fpeYtuA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1652749820816?e=1746662400&v=beta&t=XPfzpPm16pfuRy-vi7jv2qJAx34Eeun5xMlr8jP7wig"
          alt="Profile Picture"/>
     <h1>Ugur Nezir</h1>
     <p>A Hufflepuff computer engineer trying to specialize on chip design, who is still at the start of their journey
        <br/>Istanbul, Turkey</p>
-  
-    <!-- Updated: icon + text links -->
     <ul class="sidebar-links">
       <li>
         <a href="https://www.linkedin.com/in/ugur-nezir/" target="_blank">
-          <!-- Placeholder icon; replace with your actual icon SVG or PNG -->
-          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/linkedin.png" alt="LinkedIn icon" class="icon" />
+          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/linkedin.png"
+               alt="LinkedIn icon" class="icon" />
           LinkedIn
         </a>
       </li>
       <li>
         <a href="https://www.researchgate.net/profile/Ugur-Nezir" target="_blank">
-          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/researchgate.png" alt="ResearchGate icon" class="icon" />
+          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/researchgate.png"
+               alt="ResearchGate icon" class="icon" />
           ResearchGate
         </a>
       </li>
       <li>
         <a href="https://github.com/yesilzeytin" target="_blank">
-          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/github.png" alt="GitHub icon" class="icon" />
+          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/github.png"
+               alt="GitHub icon" class="icon" />
           GitHub
         </a>
       </li>
       <li>
         <a href="https://orcid.org/0000-0002-2260-6308" target="_blank">
-          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/orcid.png" alt="ORCID icon" class="icon" />
+          <img src="https://raw.githubusercontent.com/yesilzeytin/about-me/refs/heads/main/images/orcid.png"
+               alt="ORCID icon" class="icon" />
           ORCID
         </a>
       </li>
@@ -678,11 +628,6 @@
       // For top nav on mobile
       const navList = document.getElementById('nav-list');
       navList.classList.toggle('open');
-    }
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('open'); 
-      // 'open' is the CSS class that sets transform: translateX(0)
     }
   </script>
 </body>
