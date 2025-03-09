@@ -237,12 +237,16 @@
     /* -------------------------------
        RESPONSIVE MEDIA QUERIES
     --------------------------------*/
+    /* Sidebar Toggle Button */
     .sidebar-toggle {
-      display: none;          /* show only on mobile (see media query below) */
+      /* 1) Remove the transform that was shifting the button off-screen */
+      /* transform: translateX(-100%); <-- remove this line entirely */
+    
+      display: none;         
       position: absolute;     
-      left: 10px;             /* place it near the left edge */
-      top: 10px;              /* place it near the top edge */
-      z-index: 1102;          /* higher than sidebar’s 1001 */
+      left: 10px;
+      top: 10px;
+      z-index: 1102; /* Ensure the button is above the sidebar (which is z-index: 1001) */
       background: none;
       border: none;
       font-size: 1.4rem;
@@ -253,23 +257,17 @@
       /* Collapse sidebar */
       /* Sidebar is hidden by default on mobile */
       .sidebar {
+        /* 2) Keep the sidebar hidden by default on mobile */
         transform: translateX(-100%);
-        z-index: 1001; /* sidebar’s z-index is lower than button’s 1102 */
       }
-      
-      /* If we add .open, the sidebar slides into view */
       .sidebar.open {
         transform: translateX(0);
       }
-
+    
       .sidebar-toggle {
-         display: inline-block;  /* show on mobile */
-         position: absolute;     /* if you want it pinned top-left */
-         top: 10px;
-         left: 10px;
-         transform: translateX(-100%);
-         z-index: 1001; /* sidebar’s z-index is lower than button’s 1102 */
-       }
+        display: inline-block; /* Show the button on mobile */
+        /* 3) No transform here – let the button stay fully visible */
+      }
     
       /* Remove left margin on content, so it uses full width */
       .page-wrapper {
