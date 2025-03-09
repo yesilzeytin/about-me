@@ -25,16 +25,15 @@
       text-decoration: underline;
     }
 
-    /* LAYOUT WRAPPER
-       (No longer forced margin-left in base styles) */
+    /* PAGE WRAPPER */
     .page-wrapper {
       transition: margin-left 0.3s ease;
     }
 
-    /* FIXED SIDEBAR (DESKTOP) */
+    /* SIDEBAR (DESKTOP) */
     .sidebar {
       position: fixed;
-      border: 2px solid #000; /* solid black border */
+      border: 2px solid #000;
       left: 0;
       top: 0;
       bottom: 0;
@@ -42,8 +41,8 @@
       background-color: #fffcbf;
       padding: 1rem;
       text-align: center;
-      overflow-y: auto; /* If content grows too large */
-      z-index: 1001; /* Appear on top */
+      overflow-y: auto;
+      z-index: 1001;
     }
     .sidebar .profile-pic {
       width: 120px;
@@ -73,7 +72,6 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      text-align: left;
       background-color: transparent;
       box-shadow: none;
       border-radius: 0;
@@ -89,13 +87,13 @@
       margin-right: 0.5rem;
     }
 
-    /* TOP NAVIGATION BAR */
+    /* HEADER (TOP NAV) */
     header {
       background-color: #fffcbf;
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 2px solid #000; /* black border */
+      border-bottom: 2px solid #000;
     }
     .navbar {
       display: flex;
@@ -124,7 +122,7 @@
       border: none;
     }
 
-    /* MAIN CONTENT SECTIONS */
+    /* MAIN CONTENT */
     main {
       max-width: 900px;
       margin: 1.5rem auto;
@@ -163,37 +161,36 @@
 
     /* ITEM COLOR BLOCKS */
     .yongatek-item {
-      background-color: #f5ffff; /* light blue */
+      background-color: #f5ffff; 
       border: 2px solid #000;
       padding: 1rem;
     }
     .yeditepe-item {
-      background-color: #e8ebff; /* dark blue */
+      background-color: #e8ebff; 
       border: 2px solid #000;
       padding: 1rem;
     }
     .cactus-item {
-      background-color: #ffeded; /* red */
+      background-color: #ffeded; 
       border: 2px solid #000;
       padding: 1rem;
     }
     .meteksan-item {
-      background-color: #fffaed; /* yellow */
+      background-color: #fffaed; 
       border: 2px solid #000;
       padding: 1rem;
     }
     .research-item {
-      background-color: #ecffeb; /* green */
+      background-color: #ecffeb; 
       border: 2px solid #000;
       padding: 1rem;
     }
     .hobby-item {
-      background-color: #f5ebff; /* purple */
+      background-color: #f5ebff;
       border: 2px solid #000;
       padding: 1rem;
     }
 
-    /* FOOTER (unused here) */
     footer {
       text-align: center;
       padding: 1rem 0;
@@ -201,22 +198,19 @@
     }
 
     /* RESPONSIVE MEDIA QUERIES */
+    /* Mobile: Sidebar becomes normal top section */
     @media (max-width: 768px) {
-      /* Make the sidebar a normal top section instead of fixed */
       .sidebar {
         position: static;
         width: auto;
         margin: 1rem;
       }
-      /* Remove forced margin from the content on mobile */
       .page-wrapper {
         margin-left: 0;
       }
-      /* Hide hamburger menu, or keep if you want it for the top nav */
       .menu-toggle {
         display: inline-block;
       }
-      /* Turn horizontal nav into a dropdown */
       .navbar ul {
         position: absolute;
         top: 60px;
@@ -235,11 +229,22 @@
         margin: 0.5rem 0;
       }
     }
+
+    /* Desktop: Make sure top bar text isn't hidden under sidebar */
+    @media (min-width: 769px) {
+      /* Shift the entire nav bar content to the right by 200px (width of sidebar). */
+      .navbar {
+        margin-left: 200px;
+      }
+      /* Also push the main page wrapper to the right so content isn't hidden */
+      .page-wrapper {
+        margin-left: 200px;
+      }
+    }
   </style>
 </head>
-<body>
 
-  <!-- TOP NAV BAR -->
+<body>
   <header>
     <div class="navbar">
       <div class="brand">Ugur Nezir - Personal Page</div>
